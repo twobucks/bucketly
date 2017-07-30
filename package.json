@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/twobucks/dropbox-for-s3/issues"
   },
-  "homepage": "https://github.com/twobucks/dropbox-for-s3#readme"
+  "homepage": "https://github.com/twobucks/dropbox-for-s3#readme",
+  "dependencies": {
+    "pg": "^7.0.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.2",
+    "sequelize-cli": "^2.7.0"
+  }
 }
