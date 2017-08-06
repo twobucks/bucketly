@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "watch": "DEBUG=instant* nodemon server"
+    "watch": "npm run watch-css & DEBUG=instant* nodemon server",
+    "watch-css": "stylus css/main.styl -o public/ -w",
+    "build-css": "stylus css/main.styl -o public/ -c"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "sequelize-cli": "^2.7.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "stylus": "^0.54.5"
   }
 }
