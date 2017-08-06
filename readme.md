@@ -1,4 +1,4 @@
-# ✨Bucketly
+# ✨ Bucketly
 
 Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/mo for a private plan.
 
