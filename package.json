@@ -14,19 +14,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twobucks/dropbox-for-s3.git"
+    "url": "git+https://github.com/twobucks/bucketly.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/twobucks/dropbox-for-s3/issues"
+    "url": "https://github.com/twobucks/bucketly/issues"
   },
-  "homepage": "https://github.com/twobucks/dropbox-for-s3#readme",
+  "homepage": "https://github.com/twobucks/bucketly#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "ejs": "^2.5.6",
+    "emoji-favicon": "^0.3.0",
     "express": "^4.15.3",
     "pg": "^7.0.2",
     "pg-hstore": "^2.3.2",
