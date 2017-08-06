@@ -9,7 +9,8 @@
     "start": "node server",
     "watch": "npm run watch-css & DEBUG=instant* nodemon server",
     "watch-css": "stylus css/main.styl -o public/ -w",
-    "build-css": "stylus css/main.styl -o public/ -c"
+    "build-css": "stylus css/main.styl -o public/ -c",
+    "build": "npm run build-css"
   },
   "repository": {
     "type": "git",
