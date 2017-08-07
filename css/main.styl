@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
 }
 
+b, strong {
+  font-weight: 600;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -74,10 +78,20 @@ section {
     &:hover, &:visited, &:link, &:active {
       text-decoration: none
       }
+    &:active {
+      color: #16a085 !important /* Fallback for older browsers */
+      background-color: #fff
+    }
+
+    &.reverse {
+      color: black;
+      background-color: #fff;
+
       &:active {
-        color: #16a085 !important /* Fallback for older browsers */
-        background-color: #fff
-        }
+        background: black;
+        color: rgba(255,255,255,1);
+      }
+    }
 }
 
 header {
@@ -120,6 +134,7 @@ header {
 }
 
 footer {
+  background-color: black;
   text-align: center;
   padding: 20px;
   a {
@@ -131,6 +146,44 @@ footer {
       color: #fff;
     }
   }
+}
+
+.pricing {
+  background-color: black;
+  display: block;
+  -webkit-box-pack: initial;
+  -ms-flex-pack: initial;
+  padding-bottom: 100px;
+
+  h1 {
+    text-align: center;
+    height: 2em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-top: 10px;
+  }
+}
+
+.pricing-table {
+  width: 600px;
+  margin: auto;
+}
+
+.pricing-heading {
+  width: 100%;
+  display: inline-block;
+}
+
+.pricing-plan {
+  float: left;
+  padding: 50px;
+  width: 50%;
 }
 
 // mobile
@@ -165,6 +218,18 @@ footer {
       width: 100%;
       margin-top: 80px;
     }
+  }
+
+  .pricing-table {
+    width: 100%;
+  }
+
+  .pricing-plan {
+    width: 100%;
+  }
+
+  .initial {
+    padding-bottom: 100px;
   }
 }
 
