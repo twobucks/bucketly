@@ -31,7 +31,6 @@ body {
 }
 section {
 /* flex: 1; would be enough but it looks bad in IE */
-  margin-top: 200px;
   flex: 1 0 auto;
   width: 100%;
   display: flex;
@@ -41,6 +40,7 @@ section {
   -ms-flex-pack: center;
   justify-content: center;
   align-items: flex-end;
+  height: 100vh;
 }
 section .left {
   padding-left: 100px;
@@ -88,9 +88,14 @@ section .right img {
   background: #000;
   color: #fff;
 }
+.initial {
+  padding-top: 20vh;
+  height: 86vh;
+}
 header {
   margin: 16px;
   padding: 20px;
+  height: 10vh;
 }
 header .logo {
   display: inline;
@@ -121,6 +126,7 @@ header .btn {
   padding: 10px;
 }
 footer {
+  height: 7vh;
   background-color: #000;
   text-align: center;
   padding: 20px;
@@ -139,6 +145,7 @@ footer a:hover {
   -webkit-box-pack: initial;
   -ms-flex-pack: initial;
   padding-bottom: 100px;
+  height: 93vh;
 }
 .pricing h1 {
   text-align: center;
@@ -163,6 +170,7 @@ footer a:hover {
   float: left;
   padding: 50px;
   width: 50%;
+  margin-top: 10vh;
 }
 @media (max-width: 768px) {
   section {
