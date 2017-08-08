@@ -7,10 +7,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "watch": "npm run watch-css & DEBUG=instant* nodemon server",
+    "watch": "npm run watch-css & npm run watch-js & DEBUG=instant* nodemon server",
     "watch-css": "stylus css/main.styl -o public/ -w",
     "build-css": "stylus css/main.styl -o public/ -c",
-    "build": "npm run build-css"
+    "build-js": "NODE_ENV=production webpack",
+    "watch-js": "webpack --watch",
+    "build": "npm run build-css && npm run build-js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +37,12 @@
     "sequelize-cli": "^2.7.0"
   },
   "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "nodemon": "^1.11.0",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^2.6.1"
   }
 }
