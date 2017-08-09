@@ -26,6 +26,16 @@ body {
   flex-direction: column;
 }
 
+a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none
+  font-weight: 600
+
+  &:hover {
+    color: #fff;
+  }
+}
+
 
 .landing {
   background: #74ebd5;  /* fallback for old browsers */
@@ -33,7 +43,7 @@ body {
   background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-section {
+section.landing {
   /* flex: 1; would be enough but it looks bad in IE */
   flex: 1 0 auto;
   width: 100%;
@@ -59,6 +69,18 @@ section {
     img {
       width: 500px;
     }
+  }
+}
+
+section.images, section.setup {
+  text-align: center;
+
+  h1 {
+    margin-bottom: 50px;
+  }
+
+  a {
+    border-bottom: 1px white solid;
   }
 }
 
@@ -130,16 +152,6 @@ header {
     }
   }
 
-  a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none
-    font-weight: 600
-
-    &:hover {
-      color: #fff;
-    }
-  }
-
   .btn {
     font-size: initial;
     padding: 10px;
@@ -151,16 +163,6 @@ footer {
   line-height: 7vh;
   background-color: black;
   text-align: center;
-
-  a {
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none
-    font-weight: 600
-
-    &:hover {
-      color: #fff;
-    }
-  }
 }
 
 .pricing {

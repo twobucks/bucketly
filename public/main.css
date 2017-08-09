@@ -27,12 +27,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+a {
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  font-weight: 600;
+}
+a:hover {
+  color: #fff;
+}
 .landing {
   background: #74ebd5; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #acb6e5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-section {
+section.landing {
 /* flex: 1; would be enough but it looks bad in IE */
   flex: 1 0 auto;
   width: 100%;
@@ -45,15 +53,27 @@ section {
   align-items: flex-end;
   height: 100vh;
 }
-section .left {
+section.landing .left {
   padding-left: 100px;
   max-width: 450px;
 }
-section .left h1 {
+section.landing .left h1 {
   margin-top: 50px;
 }
-section .right img {
+section.landing .right img {
   width: 500px;
+}
+section.images,
+section.setup {
+  text-align: center;
+}
+section.images h1,
+section.setup h1 {
+  margin-bottom: 50px;
+}
+section.images a,
+section.setup a {
+  border-bottom: 1px #fff solid;
 }
 .btn {
   display: inline-block;
@@ -117,14 +137,6 @@ header ul li {
   display: inline;
   margin: 10px;
 }
-header a {
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
-  font-weight: 600;
-}
-header a:hover {
-  color: #fff;
-}
 header .btn {
   font-size: initial;
   padding: 10px;
@@ -134,14 +146,6 @@ footer {
   line-height: 7vh;
   background-color: #000;
   text-align: center;
-}
-footer a {
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
-  font-weight: 600;
-}
-footer a:hover {
-  color: #fff;
 }
 .pricing {
   background-color: #000;
