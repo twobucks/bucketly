@@ -1,8 +1,8 @@
 {
-  "name": "dropbox-for-s3",
+  "name": "Bucketly",
   "version": "0.0.1",
   "private": true,
-  "description": "File sharing for developers. Share files from your own S3. Free when self-hosted and $2/mo for a private plan.",
+  "description": "Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/mo for a private plan.",
   "main": "index.js",
   "scripts": {
     "test": "standard --fix",
