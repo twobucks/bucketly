@@ -66,6 +66,7 @@ section.initial .right img {
 section.images,
 section.setup {
   text-align: center;
+  height: 77vh;
 }
 section.images h1,
 section.setup h1 {
