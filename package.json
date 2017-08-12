@@ -20,7 +20,7 @@
     "build-css": "stylus css/main.styl -o public/ -c",
     "build-js": "cd client && npm run build",
     "watch-js": "cd client/ && npm start",
-    "build": "npm run build-css && npm run build-js"
+    "build": "npm run build-js"
   },
   "repository": {
     "type": "git",
