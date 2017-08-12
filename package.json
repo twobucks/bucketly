@@ -4,8 +4,15 @@
   "private": true,
   "description": "Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/mo for a private plan.",
   "main": "index.js",
+  "standard": {
+    "globals": ["it", "describe"],
+    "ignore": [
+      "client/build",
+      "client/node_modules"
+    ]
+  },
   "scripts": {
-    "test": "standard --fix",
+    "test": "standard --fix && mocha test",
     "start": "node server & cd client && react-scripts start",
     "watch": "npm run watch-css & npm run watch-js & DEBUG=instant* nodemon server",
     "watch-css": "stylus css/main.styl -o public/ -w",
@@ -46,8 +53,13 @@
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "mz": "^2.6.0",
     "nodemon": "^1.11.0",
     "stylus": "^0.54.5",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^2.6.1"
   }

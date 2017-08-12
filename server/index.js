@@ -15,13 +15,13 @@ const app = express()
 app.use(bodyParser.json())
 app.use(compression())
 app.use(emojiFavicon('sparkles'))
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'))
 
-app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
+app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
-});
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
+})
 
 app.post('/', async (req, res) => {
   try {
