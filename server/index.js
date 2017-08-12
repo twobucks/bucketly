@@ -59,3 +59,5 @@ const server = app.listen(9000, function () {
 
   console.log('Server listening at http://127.0.0.1:%s', port)
 })
+
+module.exports = server
