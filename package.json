@@ -6,12 +6,12 @@
   "main": "index.js",
   "scripts": {
     "test": "standard --fix",
-    "start": "node server",
+    "start": "node server & cd client && react-scripts start",
     "watch": "npm run watch-css & npm run watch-js & DEBUG=instant* nodemon server",
     "watch-css": "stylus css/main.styl -o public/ -w",
     "build-css": "stylus css/main.styl -o public/ -c",
-    "build-js": "NODE_ENV=production webpack",
-    "watch-js": "webpack --watch",
+    "build-js": "cd client && npm run build",
+    "watch-js": "cd client/ && npm start",
     "build": "npm run build-css && npm run build-js"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "ejs": "^2.5.6",
     "emoji-favicon": "^0.3.0",
     "express": "^4.15.3",
+    "morgan": "^1.8.2",
     "multiparty": "^4.1.3",
     "pg": "^7.0.2",
     "pg-hstore": "^2.3.2",

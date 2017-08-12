@@ -5,6 +5,7 @@ const path = require('path')
 const emojiFavicon = require('emoji-favicon')
 const uuid = require('uuid')
 const AWS = require('aws-sdk')
+const morgan = require('morgan')
 
 const Promise = require('bluebird')
 const multiparty = Promise.promisifyAll(require('multiparty'), {multiArgs: true})
@@ -14,14 +15,13 @@ const app = express()
 app.use(bodyParser.json())
 app.use(compression())
 app.use(emojiFavicon('sparkles'))
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'))
-})
+app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
 
-app.get('/404', function (req, res) {
-  res.sendFile(path.join(__dirname, '../public', '404.html'))
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 app.post('/', async (req, res) => {
   try {
@@ -52,11 +52,9 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.set('views', path.join(__dirname, 'views'))
 app.set('x-powered-by', false)
-app.use('/public', express.static(path.join(__dirname, '../public')))
 
-const server = app.listen(3000, function () {
+const server = app.listen(9000, function () {
   const port = server.address().port
 
   console.log('Server listening at http://127.0.0.1:%s', port)
