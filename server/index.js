@@ -48,7 +48,9 @@ app.post('/', async (req, res) => {
       uuid: id
     })
   } catch (e) {
-    console.log(e.message)
+    res.status(500).json({
+      error: e.message
+    })
   }
 })
 
