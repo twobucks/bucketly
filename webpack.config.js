@@ -1,11 +1,11 @@
-var webpack = require('webpack')
+var path = require('path')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 var PROD = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry: './client/index.js',
   output: {
-    path: __dirname + '/public',
+    path: path.join(__dirname, '/public'),
     filename: PROD ? 'bundle.min.js' : 'bundle.js'
   },
   devtool: 'source-map',

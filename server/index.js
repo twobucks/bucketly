@@ -23,24 +23,24 @@ app.get('/404', function (req, res) {
   res.sendFile(path.join(__dirname, '../public', '404.html'))
 })
 
-app.post('/', async (req, res, next) => {
+app.post('/', async (req, res) => {
   try {
     const form = new multiparty.Form()
     const id = uuid.v4()
-    const [_, files] = await form.parseAsync(req);
+    const [_, files] = await form.parseAsync(req) // eslint-disable-line no-unused-vars
     const path = files.file[0].path
     const s3 = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY,
       secretAccessKey: process.env.AWS_SECRET_KEY
     })
     Promise.promisifyAll(Object.getPrototypeOf(s3))
-    const Bucket = "Bucketly"
-    const params = { Bucket, Key: id, Body: fs.createReadStream(path)};
+    const Bucket = 'Bucketly'
+    const params = { Bucket, Key: id, Body: fs.createReadStream(path) }
 
     await s3.createBucketAsync({ Bucket })
     await s3.putObjectAsync(params)
 
-    console.log("Successfully uploaded data to " + Bucket + "/" + id);
+    console.log('Successfully uploaded data to ' + Bucket + '/' + id)
 
     await fs.unlinkAsync(path)
 
