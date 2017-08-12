@@ -10,6 +10,7 @@ Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/m
 npm run start # start a node server
 npm run watch # watch and build CSS/JS on changes
 npm run build # build JS/CSS for production
+npm test      # run tests
 ```
 
 ## License
