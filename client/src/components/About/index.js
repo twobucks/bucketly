@@ -9,9 +9,9 @@ export default class About extends Component {
   // state = {}
 
   render () {
-    const { className, ...props } = this.props
+    const { className } = this.props
     return (
-      <div className={classnames('About', className)} {...props}>
+      <div className={classnames('About', className)}>
         <h1>
           About
         </h1>

@@ -1,0 +1,299 @@
+html, body {
+  color: white;
+  background: black;
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: 200;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none
+  font-weight: 600
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+
+.landing {
+  background: #74ebd5;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+section.initial {
+  /* flex: 1; would be enough but it looks bad in IE */
+  flex: 1 0 auto;
+  width: 100%;
+  display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+
+  .left {
+    padding-left: 100px;
+    max-width: 450px;
+
+    h1 {
+      margin-top: 50px;
+    }
+  }
+
+  .right {
+    img {
+      width: 500px;
+    }
+  }
+}
+
+section.images, section.setup {
+  text-align: center;
+  height: 77vh;
+
+  h1 {
+    margin-bottom: 50px;
+  }
+
+  a {
+    border-bottom: 1px white solid;
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin: 0 0 5px 0;
+  padding: 18px 32px;
+  background: black;
+  color: rgba(255,255,255,1);
+  font-size: 21px;
+  font-weight: 800;
+  //text-transform: uppercase;
+  letter-spacing: .02em;
+  border-radius: 4px;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,.1);
+  transition: .4s all;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 14px 25px 0 rgba(0,0,0,.15);
+    transition: .4s all;
+    }
+    &:hover, &:visited, &:link, &:active {
+      text-decoration: none
+      }
+    &:active {
+      color: black
+      background-color: #fff
+    }
+
+    &.reverse {
+      color: black;
+      background-color: #fff;
+
+      &:active {
+        background: #fff;
+        color: black;
+      }
+    }
+}
+
+.initial {
+  padding-top: 20vh;
+  height: 86vh;
+}
+
+header {
+  margin: 16px;
+  padding: 20px;
+  height: 10vh;
+
+  .logo {
+    display: inline;
+    margin-left: 30px;
+  }
+
+  ul {
+    float: right;
+    padding: 20px;
+    list-style: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    li {
+      display: inline;
+      margin: 10px;
+    }
+  }
+
+  .btn {
+    font-size: initial;
+    padding: 10px;
+  }
+}
+
+footer {
+  height: 7vh;
+  line-height: 7vh;
+  background-color: black;
+  text-align: center;
+}
+
+.pricing {
+  background-color: black;
+  display: block;
+  -webkit-box-pack: initial;
+  -ms-flex-pack: initial;
+  padding-bottom: 100px;
+  height: 93vh;
+
+  h1 {
+    text-align: center;
+    height: 2em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-top: 10px;
+  }
+}
+
+.pricing-table {
+  width: 600px;
+  margin: auto;
+}
+
+.pricing-heading {
+  width: 100%;
+  display: inline-block;
+}
+
+.pricing-plan {
+  float: left;
+  padding: 50px;
+  width: 50%;
+  margin-top: 10vh;
+}
+
+.login {
+  height: 93vh;
+  background-color: black;
+
+  .form-section {
+    margin: auto;
+    margin-top: 20vh;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .btn {
+    margin-right: 5px;
+  }
+
+  input.email {
+    background: black;
+    border: 0;
+    border-bottom: 1px white solid;
+    width: 70%;
+    color: #fff;
+    outline: none;
+    margin-left: 10px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
+
+// mobile
+@media (max-width: 768px) {
+  section {
+    margin-top: 0px;
+    display: block;
+    text-align: center;
+
+    .left {
+      padding: 20px;
+    }
+
+    .right {
+      text-align: center;
+      margin-top: 50px;
+      img {
+        width: 300px;
+      }
+    }
+  }
+
+  header {
+    text-align: center;
+
+    .logo {
+      width: 100%;
+      margin-left: 0px;
+    }
+
+    ul {
+      width: 100%;
+      margin-top: 80px;
+    }
+  }
+
+  .pricing {
+    height: auto;
+  }
+
+  .pricing-table {
+    width: 100%;
+  }
+
+  .pricing-plan {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .initial {
+    padding-top: 0;
+    padding-bottom: 100px;
+    height: auto;
+  }
+
+  .login {
+    .form-section {
+      padding: 50px;
+    }
+  }
+}
+
