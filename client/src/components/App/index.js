@@ -1,7 +1,10 @@
 // src/components/App/index.js
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import './style.css'
+
+import Footer from '../Footer';
 
 class App extends Component {
   // static propTypes = {}
@@ -16,10 +19,10 @@ class App extends Component {
 
           <ul>
             <li>
-              <a href=''>Login</a>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <a href="/public/login.html" className="btn">Start free trial</a>
+              <Link to="/login" className="btn">Start free trial</Link>
             </li>
           </ul>
         </header>
@@ -28,7 +31,7 @@ class App extends Component {
             <h1>Screenshot sharing <br/> for developers</h1>
             <p>Affordable screenshot sharing, using your own S3. Start your 30 day free trial now.</p>
 
-            <a href="/public/login.html" className="btn">Start your free trial now</a>
+            <Link to="/login" className="btn">Start your free trial now</Link>
           </div>
 
           <div className='right'>
@@ -80,16 +83,12 @@ class App extends Component {
                 </li>
               </ul>
 
-              <a href='/public/login.html' className='btn reverse'>
-                Get started
-              </a>
+              <Link to="/login" className="btn reverse">Get started</Link>
             </div>
           </div>
         </section>
 
-        <footer>
-          <a href="https://twobucks.co">Two Bucks</a> © 2017
-        </footer>
+        <Footer />
       </div>
     )
   }
