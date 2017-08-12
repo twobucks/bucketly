@@ -1,7 +1,6 @@
 // src/components/App/index.js
 import React, { Component } from 'react'
 
-import logo from './logo.svg'
 import './style.css'
 
 class App extends Component {
@@ -33,7 +32,7 @@ class App extends Component {
           </div>
 
           <div className='right'>
-            <img src='/public/MBPR.png' alt='' />
+            <img src='/MBPR.png' alt='' />
           </div>
 
         </section>

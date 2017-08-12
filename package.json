@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "standard --fix && mocha test",
-    "start": "node server & cd client && react-scripts start",
+    "start": "node server & cd client && npm start",
     "start:server": "node server",
     "watch": "npm run watch-css & npm run watch-js & DEBUG=instant* nodemon server",
     "watch-css": "stylus css/main.styl -o public/ -w",

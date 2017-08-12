@@ -28,8 +28,8 @@ body {
 
 a {
   color: rgba(255, 255, 255, 0.9);
-  text-decoration: none
-  font-weight: 600
+  text-decoration: none;
+  font-weight: 600;
 
   &:hover {
     color: #fff;
@@ -41,6 +41,11 @@ a {
   background: #74ebd5;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #ACB6E5, #74ebd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  position: absolute;
+  top:0;
+  right:0;
+  left: 0;
 }
 
 section.initial {
@@ -53,8 +58,9 @@ section.initial {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  align-items: flex-end;
-  height: 100vh;
+  align-items: flex-start;
+  height: 86vh;
+  padding-top: 20vh;
 
   .left {
     padding-left: 100px;
@@ -106,11 +112,11 @@ section.images, section.setup {
     transition: .4s all;
     }
     &:hover, &:visited, &:link, &:active {
-      text-decoration: none
+      text-decoration: none;
       }
     &:active {
-      color: black
-      background-color: #fff
+      color: black;
+      background-color: #fff;
     }
 
     &.reverse {
@@ -122,11 +128,6 @@ section.images, section.setup {
         color: black;
       }
     }
-}
-
-.initial {
-  padding-top: 20vh;
-  height: 86vh;
 }
 
 header {
