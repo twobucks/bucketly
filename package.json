@@ -15,9 +15,7 @@
     "test": "standard --fix && mocha test",
     "start": "node server & cd client && npm start",
     "start:server": "node server",
-    "watch": "npm run watch-css & npm run watch-js & DEBUG=instant* nodemon server",
-    "watch-css": "stylus css/main.styl -o public/ -w",
-    "build-css": "stylus css/main.styl -o public/ -c",
+    "watch": "npm run watch-js & DEBUG=instant* nodemon server",
     "build-js": "cd client && npm run build",
     "watch-js": "cd client/ && npm start",
     "build": "npm run build-js"
