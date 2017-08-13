@@ -9,13 +9,13 @@ class Images extends Component {
     return (
       <div>
         <Header />
-        <section className="images">
+        <section className='images'>
           <h1>Images</h1>
 
           <p>You have <b>0</b> images. </p>
 
           <p>
-            <Link to="/setup" className="btn reverse">Set up your account with S3</Link>
+            <Link to='/setup' className='btn reverse'>Set up your account with S3</Link>
           </p>
         </section>
         <Footer />

@@ -22,7 +22,7 @@ app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
 
 app.get('/api/todos', (req, res) => {
   res.json([
-    {id: 1, title: "something else"}
+    {id: 1, title: 'something else'}
   ])
 })
 
@@ -39,7 +39,7 @@ app.post('/api/test', async (req, res) => {
 
     const Bucket = bucketName
     const id = uuid.v4()
-    const filePath = path.join(__dirname, "..", "test", "cat.jpg")
+    const filePath = path.join(__dirname, '..', 'test', 'cat.jpg')
 
     const params = { Bucket, Key: id, Body: fs.createReadStream(filePath) }
 

@@ -12,10 +12,10 @@ class Login extends Component {
           <div className='form-section'>
             <form action='' method='post'>
               <label>Email</label>
-              <input className="email" type='' name='' />
+              <input className='email' type='' name='' />
             </form>
-            <Link to="/images" className='btn reverse'>Login with Github</Link>
-            <Link to="/images" className='btn reverse'>Login with Twitter</Link>
+            <Link to='/images' className='btn reverse'>Login with Github</Link>
+            <Link to='/images' className='btn reverse'>Login with Twitter</Link>
           </div>
         </div>
 

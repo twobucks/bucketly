@@ -6,12 +6,6 @@ import Header from '../Header'
 import Loading from '../Loading'
 
 class Setup extends Component {
-  state = {
-    bucketName: '',
-    awsAccessKey: '',
-    awsSecretKey: ''
-  }
-
   constructor (props) {
     super(props)
 
@@ -19,19 +13,25 @@ class Setup extends Component {
     this.handleBucketNameChange = this.handleBucketNameChange.bind(this)
     this.handleAccessKeyChange = this.handleAccessKeyChange.bind(this)
     this.handleSecretKeyChange = this.handleSecretKeyChange.bind(this)
+
+    this.state = {
+      bucketName: '',
+      awsAccessKey: '',
+      awsSecretKey: ''
+    }
   }
 
   save () {
     const { bucketName, awsSecretKey, awsAccessKey } = this.state
 
-    this.setState({isLoading: true, message: "Running AWS S3 configuration check..."})
+    this.setState({isLoading: true, message: 'Running AWS S3 configuration check...'})
 
     axios.post('/api/test', {
       bucket_name: bucketName,
       aws_secret_key: awsSecretKey,
       aws_access_key: awsAccessKey
     }).then((response) => {
-      this.setState({isLoading: false, message: "AWS S3 configuration check was successful."})
+      this.setState({isLoading: false, message: 'AWS S3 configuration check was successful.'})
       console.log('success')
     }).catch((error) => {
       this.setState({isLoading: false, message: error.response.data.error})
@@ -52,14 +52,14 @@ class Setup extends Component {
   }
 
   render () {
-    const buttonSection = this.state.isLoading ?
-      <Loading /> :
-      <div className="btn reverse" onClick={this.save}>Save</div>;
+    const buttonSection = this.state.isLoading
+      ? <Loading />
+      : <div className='btn reverse' onClick={this.save}>Save</div>
 
     return (
       <div>
         <Header />
-        <section className="setup">
+        <section className='setup'>
           <h1>Setup</h1>
 
           <p>1. Go to AWS dashboard page.</p>
@@ -79,7 +79,7 @@ class Setup extends Component {
             <input type='' name='' value={this.state.awsSecretKey} onChange={this.handleSecretKeyChange} />
           </div>
 
-          <div className="message-section">
+          <div className='message-section'>
             {this.state.message}
           </div>
 

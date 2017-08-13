@@ -4,7 +4,7 @@ class Footer extends Component {
   render () {
     return (
       <footer>
-        <a href="https://twobucks.co">Two Bucks</a> © 2017
+        <a href='https://twobucks.co'>Two Bucks</a> © 2017
       </footer>
     )
   }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import './style.css'
 
-import Footer from '../Footer';
+import Footer from '../Footer'
 
 class App extends Component {
   // static propTypes = {}
@@ -15,23 +15,23 @@ class App extends Component {
     return (
       <div className='landing'>
         <header>
-          <h1 className="logo">Bucketly</h1>
+          <h1 className='logo'>Bucketly</h1>
 
           <ul>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to='/login'>Login</Link>
             </li>
             <li>
-              <Link to="/login" className="btn">Start free trial</Link>
+              <Link to='/login' className='btn'>Start free trial</Link>
             </li>
           </ul>
         </header>
-        <section className="initial">
+        <section className='initial'>
           <div className='left'>
-            <h1>Screenshot sharing <br/> for developers</h1>
+            <h1>Screenshot sharing <br /> for developers</h1>
             <p>Affordable screenshot sharing, using your own S3. Start your 30 day free trial now.</p>
 
-            <Link to="/login" className="btn">Start your free trial now</Link>
+            <Link to='/login' className='btn'>Start your free trial now</Link>
           </div>
 
           <div className='right'>
@@ -40,7 +40,7 @@ class App extends Component {
 
         </section>
 
-        <section className="pricing">
+        <section className='pricing'>
           <div className='pricing-heading'>
             <h1>Pricing</h1>
           </div>
@@ -83,7 +83,7 @@ class App extends Component {
                 </li>
               </ul>
 
-              <Link to="/login" className="btn reverse">Get started</Link>
+              <Link to='/login' className='btn reverse'>Get started</Link>
             </div>
           </div>
         </section>

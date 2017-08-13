@@ -5,7 +5,7 @@ import './index.css'
 class Loading extends Component {
   render () {
     return (
-      <div className="loader">
+      <div className='loader'>
         Loading...
       </div>
     )
