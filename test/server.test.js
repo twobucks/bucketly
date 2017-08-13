@@ -42,9 +42,17 @@ describe('express serving', function () {
   it('responds to POST on /', () => {
     return request(app)
     .post('/')
-    .attach('file', 'test/cat.jpeg')
+    .attach('file', 'test/cat.jpg')
     .expect('Content-Type', /application\/json/)
     .expect(500)
     .then(res => expect(JSON.parse(res.text).error).to.contain('The requested bucket name is not available.'))
-  })
+  }).timeout(0)
+
+  it('responds to POST on /api/test', () => {
+    return request(app)
+    .post('/api/test')
+    .expect('Content-Type', /application\/json/)
+    .expect(500)
+    .then(res => expect(JSON.parse(res.text).error).to.contain('Missing required key'))
+  }).timeout(0)
 })

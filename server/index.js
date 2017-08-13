@@ -6,6 +6,7 @@ const emojiFavicon = require('emoji-favicon')
 const uuid = require('uuid')
 const AWS = require('aws-sdk')
 const morgan = require('morgan')
+const _ = require('lodash')
 
 const Promise = require('bluebird')
 const multiparty = Promise.promisifyAll(require('multiparty'), {multiArgs: true})
@@ -18,6 +19,42 @@ app.use(emojiFavicon('sparkles'))
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'))
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
+
+app.get('/api/todos', (req, res) => {
+  res.json([
+    {id: 1, title: "something else"}
+  ])
+})
+
+app.post('/api/test', async (req, res) => {
+  try {
+    const bucketName = req.body.bucket_name
+    const awsSecretKey = req.body.aws_secret_key
+    const awsAccessKey = req.body.aws_access_key
+    const s3 = new AWS.S3({
+      accessKeyId: awsAccessKey,
+      secretAccessKey: awsSecretKey
+    })
+    Promise.promisifyAll(Object.getPrototypeOf(s3))
+
+    const Bucket = bucketName
+    const id = uuid.v4()
+    const filePath = path.join(__dirname, "..", "test", "cat.jpg")
+
+    const params = { Bucket, Key: id, Body: fs.createReadStream(filePath) }
+
+    await s3.createBucketAsync({ Bucket })
+    await s3.putObjectAsync(params)
+    await s3.deleteObjectAsync(_.omit(params, 'Body'))
+
+    res.json({ })
+  } catch (e) {
+    // TODO: better error handling
+    res.status(500).json({
+      error: e.message
+    })
+  }
+})
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))

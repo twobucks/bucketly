@@ -91,6 +91,12 @@ section.images, section.setup {
   }
 }
 
+section.setup {
+  .message-section {
+    margin-bottom: 40px;
+  }
+}
+
 .btn {
   display: inline-block;
   margin: 0 0 5px 0;
@@ -223,20 +229,27 @@ footer {
     margin-right: 5px;
   }
 
-  input.email {
-    background: black;
-    border: 0;
-    border-bottom: 1px white solid;
-    width: 70%;
-    color: #fff;
-    outline: none;
-    margin-left: 10px;
-    margin-bottom: 40px;
-  }
 
   h1 {
     text-align: center;
   }
+}
+
+input {
+  background: black;
+  border: 0;
+  border-bottom: 1px white solid;
+  width: 70%;
+  color: #fff;
+  outline: none;
+  margin-left: 10px;
+  margin-bottom: 40px;
+}
+
+.form-section {
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin: auto;
 }
 
 // mobile
