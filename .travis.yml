@@ -1,3 +1,6 @@
+install:
+  - npm install
+  - cd client && npm install
 notifications:
   email: false
 language: node_js
