@@ -1,6 +1,7 @@
 install:
   - npm install
   - cd client && npm install && cd -
+  - npm install -g create-react-app react-scripts
 notifications:
   email: false
 language: node_js
