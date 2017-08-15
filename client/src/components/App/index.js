@@ -7,10 +7,6 @@ import './style.css'
 import Footer from '../Footer'
 
 class App extends Component {
-  // static propTypes = {}
-  // static defaultProps = {}
-  // state = {}
-
   render () {
     return (
       <div className='landing'>
