@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "test": "standard --fix && mocha test",
+    "test": "standard --fix && mocha test && cd client && npm test",
     "start": "node server & cd client && npm start",
     "start:server": "node server",
     "watch": "npm run watch-js & DEBUG=instant* nodemon server",
