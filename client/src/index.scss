@@ -256,6 +256,21 @@ input {
   margin-top: 20vh;
 }
 
+.auth0-lock-badge-bottom, .auth0-lock.auth0-lock .auth0-lock-header-logo {
+  display: none;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-name {
+  margin-top: 40px;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-cred-pane,
+.auth0-lock.auth0-lock .auth0-lock-widget,
+.auth0-lock.auth0-lock .auth0-lock-submit,
+.auth0-lock.auth0-lock .auth0-lock-widget-container {
+  border-radius: 0;
+}
+
 // mobile
 @media (max-width: 768px) {
   section {
