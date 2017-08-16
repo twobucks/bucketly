@@ -9,11 +9,13 @@ class Login extends Component {
     const lock = new Auth0LockPasswordless(process.env.REACT_APP_AUTH0_CLIENT_ID, process.env.REACT_APP_AUTH0_DOMAIN)
 
     lock.socialOrMagiclink({
+      callbackURL: process.env.REACT_APP_AUTH0_CALLBACK_URL,
+      responseType: "token",
       primaryColor: "#000000",
       connections: ["github", "twitter"],
       dict: {
-        title: "Log in",
-        welcome: "Log in"
+        title: "Log in to Bucketly",
+        welcome: "Log in to Bucketly"
       },
       container: "root",
       icon: "/twobucks.png"
