@@ -32,10 +32,10 @@ const Routes = (props) => (
       <Route exact path='/images' component={Images} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/setup' component={Setup} />
-      <Route path="/callback" render={(props) => {
-        handleAuthentication(props);
+      <Route path='/callback' render={(props) => {
+        handleAuthentication(props)
         return <Loading {...props} />
-        }}/>
+      }} />
       <Route path='*' component={NotFound} />
     </Switch>
   </Router>

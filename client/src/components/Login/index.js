@@ -22,9 +22,9 @@ class Login extends Component {
     event.preventDefault()
 
     this.auth0.authorize({
-      connection: "github",
-      responseType: "token",
-      scope: "openid profile",
+      connection: 'github',
+      responseType: 'token',
+      scope: 'openid profile',
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
       redirectUri: process.env.REACT_APP_AUTH0_CALLBACK_URL,
       nonce: randomString(10)
@@ -35,9 +35,9 @@ class Login extends Component {
     event.preventDefault()
 
     this.auth0.authorize({
-      connection: "twitter",
-      responseType: "token",
-      scope: "openid profile",
+      connection: 'twitter',
+      responseType: 'token',
+      scope: 'openid profile',
       clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
       redirectUri: process.env.REACT_APP_AUTH0_CALLBACK_URL,
       nonce: randomString(10)
@@ -53,7 +53,8 @@ class Login extends Component {
       connection: 'email',
       send: 'link',
       email
-    }, function(err, res) {
+    }, function (err, res) {
+      if (err) console.log(err)
       // TODO: handle error/success
     })
   }
@@ -65,7 +66,7 @@ class Login extends Component {
           <div className='form-section'>
             <form action='' method='post' onSubmit={this.onSubmit}>
               <label>Email</label>
-              <input ref="email" className='email' type='' name='' />
+              <input ref='email' className='email' type='' name='' />
             </form>
             <a href='/images' className='btn reverse' onClick={this.loginWithGithub}>Login with Github</a>
             <a href='/images' className='btn reverse' onClick={this.loginWithTwitter}>Login with Twitter</a>
