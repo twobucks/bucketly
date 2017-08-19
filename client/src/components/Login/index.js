@@ -69,8 +69,8 @@ class Login extends Component {
               <label>Email</label>
               <input ref='email' className='email' type='' name='' />
             </form>
-            <input value="Login with Github" type="button" className='btn reverse' onClick={this.loginWithGithub}></input>
-            <input value="Login with Twitter" type="button" className='btn reverse' onClick={this.loginWithTwitter}></input>
+            <input value='Login with Github' type='button' className='btn reverse' onClick={this.loginWithGithub} />
+            <input value='Login with Twitter' type='button' className='btn reverse' onClick={this.loginWithTwitter} />
           </div>
         </div>
 

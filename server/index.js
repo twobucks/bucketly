@@ -28,29 +28,28 @@ const jwtCheck = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: "https://twobucks.auth0.com/.well-known/jwks.json"
+    jwksUri: 'https://twobucks.auth0.com/.well-known/jwks.json'
   }),
   audience: 'https://localhost:3000',
-  issuer: "https://twobucks.auth0.com/",
+  issuer: 'https://twobucks.auth0.com/',
   algorithms: ['RS256']
-});
+})
 
-function getJWTToken(req)
-{
-  var parts = req.headers.authorization.split(' ');
-  if (parts.length == 2) {
-    var scheme = parts[0];
-    var credentials = parts[1];
+function getJWTToken (req) {
+  var parts = req.headers.authorization.split(' ')
+  if (parts.length === 2) {
+    var scheme = parts[0]
+    var credentials = parts[1]
     if (/^Bearer$/i.test(scheme)) {
-      return credentials;
+      return credentials
     }
   }
-  return false;
+  return false
 }
 
 const auth0 = new AuthenticationClient({
-  domain: 'twobucks.auth0.com',
-});
+  domain: 'twobucks.auth0.com'
+})
 
 app.get('/api/todos', jwtCheck, async (req, res) => {
   const token = getJWTToken(req)
