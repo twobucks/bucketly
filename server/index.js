@@ -7,6 +7,9 @@ const uuid = require('uuid')
 const AWS = require('aws-sdk')
 const morgan = require('morgan')
 const _ = require('lodash')
+const jwt = require('express-jwt')
+const AuthenticationClient = require('auth0').AuthenticationClient
+const jwks = require('jwks-rsa')
 
 const Promise = require('bluebird')
 const multiparty = Promise.promisifyAll(require('multiparty'), {multiArgs: true})
@@ -20,7 +23,40 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
 
-app.get('/api/todos', (req, res) => {
+const jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://twobucks.auth0.com/.well-known/jwks.json"
+  }),
+  audience: 'https://localhost:3000',
+  issuer: "https://twobucks.auth0.com/",
+  algorithms: ['RS256']
+});
+
+function getJWTToken(req)
+{
+  var parts = req.headers.authorization.split(' ');
+  if (parts.length == 2) {
+    var scheme = parts[0];
+    var credentials = parts[1];
+    if (/^Bearer$/i.test(scheme)) {
+      return credentials;
+    }
+  }
+  return false;
+}
+
+const auth0 = new AuthenticationClient({
+  domain: 'twobucks.auth0.com',
+});
+
+app.get('/api/todos', jwtCheck, async (req, res) => {
+  const token = getJWTToken(req)
+  const userinfo = await auth0.users.getInfo(token)
+  console.log(userinfo)
+  console.log(req.user)
   res.json([
     {id: 1, title: 'something else'}
   ])
