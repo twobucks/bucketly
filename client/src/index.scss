@@ -238,12 +238,15 @@ footer {
 input {
   background: black;
   border: 0;
-  border-bottom: 1px white solid;
-  width: 70%;
   color: #fff;
   outline: none;
   margin-left: 10px;
   margin-bottom: 40px;
+}
+
+input.email {
+  width: 70%;
+  border-bottom: 1px white solid;
 }
 
 .form-section {
