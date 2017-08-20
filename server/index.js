@@ -15,6 +15,9 @@ const Promise = require('bluebird')
 const multiparty = Promise.promisifyAll(require('multiparty'), {multiArgs: true})
 const fs = Promise.promisifyAll(require('fs'))
 
+const models = require('./models')
+const utils = require('./utils')
+
 const app = express()
 app.use(bodyParser.json())
 app.use(compression())
@@ -35,30 +38,44 @@ const jwtCheck = jwt({
   algorithms: ['RS256']
 })
 
-function getJWTToken (req) {
-  var parts = req.headers.authorization.split(' ')
-  if (parts.length === 2) {
-    var scheme = parts[0]
-    var credentials = parts[1]
-    if (/^Bearer$/i.test(scheme)) {
-      return credentials
-    }
-  }
-  return false
-}
 
 const auth0 = new AuthenticationClient({
   domain: 'twobucks.auth0.com'
 })
 
-app.get('/api/todos', jwtCheck, async (req, res) => {
-  const token = getJWTToken(req)
-  const userinfo = await auth0.users.getInfo(token)
-  console.log(userinfo)
-  console.log(req.user)
-  res.json([
-    {id: 1, title: 'something else'}
-  ])
+app.post('/api/login', jwtCheck, async (req, res) => {
+  try {
+    const token = utils.getJWTToken(req)
+    const userInfoRaw = await auth0.users.getInfo(token)
+    const userInfo = JSON.parse(userInfoRaw)
+    const where = utils.whereQueryFromUserInfo(userInfo)
+    const [ user, created ] = await models.User.findOrCreate({
+      where,
+      defaults: { access_token: token }
+    })
+    await user.update({ access_token: token })
+    res.json(_.pick(user, 'access_token'))
+  } catch(e) {
+    console.log(e)
+  }
+})
+
+app.get('/api/tokens', jwtCheck, async (req, res) => {
+  const token = utils.getJWTToken(req)
+  const user = await models.User.findOne({
+    where: {
+      access_token: token
+    }
+  })
+
+  if (!user) {
+    res.status(404).json({
+      error: "User not found"
+    })
+    return
+  }
+
+  res.json(_.pick(user, "s3_details"))
 })
 
 app.post('/api/test', async (req, res) => {
