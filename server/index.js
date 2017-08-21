@@ -77,8 +77,21 @@ app.get('/api/tokens', jwtCheck, async (req, res) => {
   res.json(_.pick(user, 's3_details'))
 })
 
-app.post('/api/test', async (req, res) => {
+app.post('/api/test', jwtCheck, async (req, res) => {
   try {
+    const token = utils.getJWTToken(req)
+    const user = await models.User.findOne({
+      where: {
+        access_token: token
+      }
+    })
+    user.update({
+      s3_details: {
+        bucket_name: req.body.bucket_name,
+        aws_secret_key: req.body.aws_secret_key,
+        aws_access_key: req.body.aws_access_key
+      }
+    })
     const bucketName = req.body.bucket_name
     const awsSecretKey = req.body.aws_secret_key
     const awsAccessKey = req.body.aws_access_key

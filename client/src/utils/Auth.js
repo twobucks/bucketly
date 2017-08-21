@@ -52,6 +52,10 @@ export default class Auth {
     localStorage.removeItem('expires_at')
   }
 
+  getAccessToken () {
+    return localStorage.getItem('access_token')
+  }
+
   isAuthenticated () {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     return new Date().getTime() < expiresAt
