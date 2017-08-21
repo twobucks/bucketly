@@ -1,4 +1,4 @@
-function whereQueryFromUserInfo(userinfo) {
+function whereQueryFromUserInfo (userinfo) {
   const sub = userinfo.sub
 
   switch (true) {

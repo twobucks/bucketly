@@ -38,7 +38,6 @@ const jwtCheck = jwt({
   algorithms: ['RS256']
 })
 
-
 const auth0 = new AuthenticationClient({
   domain: 'twobucks.auth0.com'
 })
@@ -49,13 +48,13 @@ app.post('/api/login', jwtCheck, async (req, res) => {
     const userInfoRaw = await auth0.users.getInfo(token)
     const userInfo = JSON.parse(userInfoRaw)
     const where = utils.whereQueryFromUserInfo(userInfo)
-    const [ user, created ] = await models.User.findOrCreate({
+    const [ user ] = await models.User.findOrCreate({
       where,
       defaults: { access_token: token }
     })
     await user.update({ access_token: token })
     res.json(_.pick(user, 'access_token'))
-  } catch(e) {
+  } catch (e) {
     console.log(e)
   }
 })
@@ -70,12 +69,12 @@ app.get('/api/tokens', jwtCheck, async (req, res) => {
 
   if (!user) {
     res.status(404).json({
-      error: "User not found"
+      error: 'User not found'
     })
     return
   }
 
-  res.json(_.pick(user, "s3_details"))
+  res.json(_.pick(user, 's3_details'))
 })
 
 app.post('/api/test', async (req, res) => {
