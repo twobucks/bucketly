@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
 import Footer from '../Footer'
 import Header from '../Header'
 import Loading from '../Loading'
 import Auth from '../../utils/Auth'
+import Request from '../../utils/Request'
 
 class Setup extends Component {
   constructor (props) {
@@ -24,13 +24,8 @@ class Setup extends Component {
     this.auth = new Auth()
   }
 
-  componentDidMount () {
-    const instance = axios.create({
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`
-      }
-    })
-    instance.get('/api/tokens').then((response) => {
+  componentWillMount () {
+    Request.get('/api/tokens').then((response) => {
       this.setState({
         bucketName: response.data.s3_details.bucket_name,
         awsAccessKey: response.data.s3_details.aws_access_key,
@@ -44,12 +39,7 @@ class Setup extends Component {
 
     this.setState({isLoading: true, message: 'Running AWS S3 configuration check...'})
 
-    const instance = axios.create({
-      headers: {
-        Authorization: `Bearer ${this.auth.getAccessToken()}`
-      }
-    })
-    instance.post('/api/test', {
+    Request.post('/api/test', {
       bucket_name: bucketName,
       aws_secret_key: awsSecretKey,
       aws_access_key: awsAccessKey
@@ -79,6 +69,10 @@ class Setup extends Component {
       ? <Loading />
       : <div className='btn reverse' onClick={this.save}>Save</div>
 
+    if (!this.auth.isAuthenticated()) {
+      return null
+    }
+
     return (
       <div>
         <Header />
@@ -89,17 +83,17 @@ class Setup extends Component {
           <p>2. Click the AWS credentials.</p>
           <div className='form-section'>
             <label>BUCKET NAME</label>
-            <input className="text" type='' name='' value={this.state.bucketName} onChange={this.handleBucketNameChange} />
+            <input className='text' type='' name='' value={this.state.bucketName} onChange={this.handleBucketNameChange} />
           </div>
 
           <div className='form-section'>
             <label>AWS ACCESS KEY</label>
-            <input className="text" type='' name='' value={this.state.awsAccessKey} onChange={this.handleAccessKeyChange} />
+            <input className='text' type='' name='' value={this.state.awsAccessKey} onChange={this.handleAccessKeyChange} />
           </div>
 
           <div className='form-section'>
             <label>AWS SECRET</label>
-            <input className="text" type='' name='' value={this.state.awsSecretKey} onChange={this.handleSecretKeyChange} />
+            <input className='text' type='' name='' value={this.state.awsSecretKey} onChange={this.handleSecretKeyChange} />
           </div>
 
           <div className='message-section'>

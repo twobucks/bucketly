@@ -1,11 +1,21 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import Footer from '../Footer'
 import Header from '../Header'
-import { Link } from 'react-router-dom'
+import Auth from '../../utils/Auth'
 
 class Images extends Component {
+  constructor (props) {
+    super(props)
+
+    this.auth = new Auth()
+  }
   render () {
+    if (!this.auth.isAuthenticated()) {
+      window.location = '/login'
+      return null
+    }
     return (
       <div>
         <Header />
