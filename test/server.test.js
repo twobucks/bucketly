@@ -45,14 +45,14 @@ describe('express serving', function () {
     .attach('file', 'test/cat.jpg')
     .expect('Content-Type', /application\/json/)
     .expect(500)
-    .then(res => expect(JSON.parse(res.text).error).to.contain('Missing credentials'))
+    .then(res => expect(JSON.parse(res.text).error).to.contain('bucket name is not available'))
   }).timeout(0)
 
   it('responds to POST on /api/test', () => {
     return request(app)
     .post('/api/test')
     .expect('Content-Type', /application\/json/)
-    .expect(500)
-    .then(res => expect(JSON.parse(res.text).error).to.contain('Missing required key'))
+    .expect(401)
+    .then(res => expect(JSON.parse(res.text).error).to.contain('invalid token'))
   }).timeout(0)
 })

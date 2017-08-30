@@ -157,6 +157,14 @@ app.post('/', async (req, res) => {
 
 app.set('x-powered-by', false)
 
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({
+      error: 'invalid token'
+    })
+  }
+})
+
 const server = app.listen(9000, function () {
   const port = server.address().port
 
