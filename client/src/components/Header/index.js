@@ -10,7 +10,9 @@ class Header extends Component {
     this.logout = this.logout.bind(this)
     this.auth = new Auth()
   }
-  logout () {
+  logout (event) {
+    event.preventDefault()
+
     this.auth.logout()
     window.location = '/login'
   }
@@ -21,7 +23,7 @@ class Header extends Component {
 
         <ul>
           <li>
-            <a href='#' onClick={this.logout}>Log out</a>
+            <a href='/logout' onClick={this.logout}>Log out</a>
           </li>
         </ul>
       </header>
