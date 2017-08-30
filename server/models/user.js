@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
     email: DataTypes.STRING,
     s3_details: DataTypes.HSTORE,
-    access_token: DataTypes.STRING,
+    auth_token: DataTypes.STRING,
     twitter_id: DataTypes.INTEGER,
     github_id: DataTypes.INTEGER
   }, {

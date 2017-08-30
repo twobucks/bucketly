@@ -50,10 +50,10 @@ app.post('/api/login', jwtCheck, async (req, res) => {
     const where = utils.whereQueryFromUserInfo(userInfo)
     const [ user ] = await models.User.findOrCreate({
       where,
-      defaults: { access_token: token }
+      defaults: { auth_token: token }
     })
-    await user.update({ access_token: token })
-    res.json(_.pick(user, 'access_token'))
+    await user.update({ auth_token: token })
+    res.json(_.pick(user, 'auth_token'))
   } catch (e) {
     console.log(e)
   }
@@ -63,7 +63,7 @@ app.get('/api/tokens', jwtCheck, async (req, res) => {
   const token = utils.getJWTToken(req)
   const user = await models.User.findOne({
     where: {
-      access_token: token
+      auth_token: token
     }
   })
 
@@ -82,7 +82,7 @@ app.post('/api/test', jwtCheck, async (req, res) => {
     const token = utils.getJWTToken(req)
     const user = await models.User.findOne({
       where: {
-        access_token: token
+        auth_token: token
       }
     })
     user.update({
