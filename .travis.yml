@@ -1,0 +1,10 @@
+install:
+  - npm install
+  - cd client && npm install && cd -
+  - npm install -g create-react-app react-scripts
+  - mv server/config.example.json server/config.json
+notifications:
+  email: false
+language: node_js
+node_js:
+  - "8"
