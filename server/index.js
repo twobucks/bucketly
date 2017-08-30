@@ -44,15 +44,16 @@ const auth0 = new AuthenticationClient({
 
 app.post('/api/login', jwtCheck, async (req, res) => {
   try {
-    const token = utils.getJWTToken(req)
-    const userInfoRaw = await auth0.users.getInfo(token)
+    const auth_token = utils.getJWTToken(req)
+    const userInfoRaw = await auth0.users.getInfo(auth_token)
     const userInfo = JSON.parse(userInfoRaw)
     const where = utils.whereQueryFromUserInfo(userInfo)
+    const access_token = uuid.v4()
     const [ user ] = await models.User.findOrCreate({
       where,
-      defaults: { auth_token: token }
+      defaults: { auth_token, access_token }
     })
-    await user.update({ auth_token: token })
+    await user.update({ auth_token })
     res.json(_.pick(user, 'auth_token'))
   } catch (e) {
     console.log(e)
@@ -74,7 +75,7 @@ app.get('/api/tokens', jwtCheck, async (req, res) => {
     return
   }
 
-  res.json(_.pick(user, 's3_details'))
+  res.json(_.pick(user, 's3_details', 'access_token'))
 })
 
 app.post('/api/test', jwtCheck, async (req, res) => {

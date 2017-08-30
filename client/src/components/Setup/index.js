@@ -18,7 +18,8 @@ class Setup extends Component {
     this.state = {
       bucketName: '',
       awsAccessKey: '',
-      awsSecretKey: ''
+      awsSecretKey: '',
+      accessToken: ''
     }
 
     this.auth = new Auth()
@@ -26,6 +27,13 @@ class Setup extends Component {
 
   componentWillMount () {
     Request.get('/api/tokens').then((response) => {
+      this.setState({
+        accessToken: response.data.access_token
+      })
+
+      if (!response.data.s3_details){
+        return
+      }
       this.setState({
         bucketName: response.data.s3_details.bucket_name,
         awsAccessKey: response.data.s3_details.aws_access_key,
@@ -94,6 +102,11 @@ class Setup extends Component {
           <div className='form-section'>
             <label>AWS SECRET</label>
             <input className='text' type='' name='' value={this.state.awsSecretKey} onChange={this.handleSecretKeyChange} />
+          </div>
+
+          <div className='form-section'>
+            <label>ACCESS TOKEN</label>
+            <input className='text' type='' name='' value={this.state.accessToken} />
           </div>
 
           <div className='message-section'>
