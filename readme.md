@@ -1,7 +1,5 @@
 # ✨ Bucketly
 
-[![Build Status](https://travis-ci.org/twobucks/bucketly.svg)](https://travis-ci.org/twobucks/bucketly)
-
 Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/mo for a private plan.
 
 ## Development
