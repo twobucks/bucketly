@@ -44,16 +44,16 @@ const auth0 = new AuthenticationClient({
 
 app.post('/api/login', jwtCheck, async (req, res) => {
   try {
-    const auth_token = utils.getJWTToken(req)
-    const userInfoRaw = await auth0.users.getInfo(auth_token)
+    const authToken = utils.getJWTToken(req)
+    const userInfoRaw = await auth0.users.getInfo(authToken)
     const userInfo = JSON.parse(userInfoRaw)
     const where = utils.whereQueryFromUserInfo(userInfo)
-    const access_token = uuid.v4()
+    const accessToken = uuid.v4()
     const [ user ] = await models.User.findOrCreate({
       where,
-      defaults: { auth_token, access_token }
+      defaults: { auth_token: authToken, access_token: accessToken }
     })
-    await user.update({ auth_token })
+    await user.update({ auth_token: authToken })
     res.json(_.pick(user, 'auth_token'))
   } catch (e) {
     console.log(e)
