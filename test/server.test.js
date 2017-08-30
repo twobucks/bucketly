@@ -45,7 +45,7 @@ describe('express serving', function () {
     .attach('file', 'test/cat.jpg')
     .expect('Content-Type', /application\/json/)
     .expect(500)
-    .then(res => expect(JSON.parse(res.text).error).to.contain('bucket name is not available'))
+    .then(res => expect(JSON.parse(res.text).error).to.contain('Missing credentials in config'))
   }).timeout(0)
 
   it('responds to POST on /api/test', () => {
