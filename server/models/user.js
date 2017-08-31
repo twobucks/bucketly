@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        // associations can be defined here
+        User.hasMany(models.Image, { foreign_key: 'user_id' })
       }
     }
   })
