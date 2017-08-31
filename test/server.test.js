@@ -39,9 +39,9 @@ describe('express serving', function () {
     .then(res => expect(res.text).to.contain('<div id="root"></div>'))
   })
 
-  it('responds to POST on /', () => {
+  it('responds to POST on /images', () => {
     return request(app)
-    .post('/')
+    .post('/images')
     .attach('file', 'test/cat.jpg')
     .expect('Content-Type', /application\/json/)
     .expect(500)

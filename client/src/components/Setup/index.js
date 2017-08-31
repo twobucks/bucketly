@@ -31,7 +31,7 @@ class Setup extends Component {
         accessToken: response.data.access_token
       })
 
-      if (!response.data.s3_details){
+      if (!response.data.s3_details) {
         return
       }
       this.setState({

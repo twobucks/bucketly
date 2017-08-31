@@ -121,11 +121,7 @@ app.post('/api/test', jwtCheck, async (req, res) => {
   }
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
-})
-
-app.post('/', async (req, res) => {
+app.post('/images', async (req, res) => {
   try {
     const form = new multiparty.Form()
     const id = uuid.v4()
@@ -154,6 +150,10 @@ app.post('/', async (req, res) => {
       error: e.message
     })
   }
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
 })
 
 app.set('x-powered-by', false)
