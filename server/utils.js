@@ -1,3 +1,7 @@
+const models = require('./models')
+const jwt = require('express-jwt')
+const jwks = require('jwks-rsa')
+
 function whereQueryFromUserInfo (userinfo) {
   const sub = userinfo.sub
 
@@ -29,7 +33,33 @@ function getJWTToken (req) {
   return false
 }
 
+async function findUserByAuthToken (req, res, next) {
+  const token = getJWTToken(req)
+  const user = await models.User.findOne({
+    where: {
+      auth_token: token
+    }
+  })
+
+  req.user = user
+  next()
+}
+
+const jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: 'https://twobucks.auth0.com/.well-known/jwks.json'
+  }),
+  audience: 'https://localhost:3000',
+  issuer: 'https://twobucks.auth0.com/',
+  algorithms: ['RS256']
+})
+
 module.exports = {
+  findUserByAuthToken,
   whereQueryFromUserInfo,
-  getJWTToken
+  getJWTToken,
+  jwtCheck
 }
