@@ -93,7 +93,7 @@ app.post('/api/test', utils.jwtCheck, utils.findUserByAuthToken, async (req, res
   }
 })
 
-app.post('/images', async (req, res) => {
+app.post('/api/images', async (req, res) => {
   try {
     const form = new multiparty.Form()
     const id = uuid.v4()
