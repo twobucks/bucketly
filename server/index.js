@@ -60,7 +60,7 @@ app.post('/api/login', jwtCheck, async (req, res) => {
   }
 })
 
-app.get('/api/tokens', jwtCheck, async (req, res) => {
+async function findUser (req, res, next) {
   const token = utils.getJWTToken(req)
   const user = await models.User.findOne({
     where: {
@@ -68,25 +68,24 @@ app.get('/api/tokens', jwtCheck, async (req, res) => {
     }
   })
 
-  if (!user) {
+  req.user = user
+  next()
+}
+
+app.get('/api/tokens', jwtCheck, findUser, async (req, res) => {
+  if (!req.user) {
     res.status(404).json({
       error: 'User not found'
     })
     return
   }
 
-  res.json(_.pick(user, 's3_details', 'access_token'))
+  res.json(_.pick(req.user, 's3_details', 'access_token'))
 })
 
-app.post('/api/test', jwtCheck, async (req, res) => {
+app.post('/api/test', jwtCheck, findUser, async (req, res) => {
   try {
-    const token = utils.getJWTToken(req)
-    const user = await models.User.findOne({
-      where: {
-        auth_token: token
-      }
-    })
-    user.update({
+    req.user.update({
       s3_details: {
         bucket_name: req.body.bucket_name,
         aws_secret_key: req.body.aws_secret_key,
