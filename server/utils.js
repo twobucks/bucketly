@@ -45,6 +45,23 @@ async function findUserByAuthToken (req, res, next) {
   next()
 }
 
+async function findUserByAccessToken (token, res) {
+  const user = await models.User.findOne({
+    where: {
+      access_token: token
+    }
+  })
+
+  if (!user) {
+    res.status(404).json({
+      error: 'user not found'
+    })
+    return
+  }
+
+  return user
+}
+
 const jwtCheck = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -59,6 +76,7 @@ const jwtCheck = jwt({
 
 module.exports = {
   findUserByAuthToken,
+  findUserByAccessToken,
   whereQueryFromUserInfo,
   getJWTToken,
   jwtCheck

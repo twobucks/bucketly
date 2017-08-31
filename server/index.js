@@ -96,15 +96,17 @@ app.post('/api/test', utils.jwtCheck, utils.findUserByAuthToken, async (req, res
 app.post('/api/images', async (req, res) => {
   try {
     const form = new multiparty.Form()
-    const id = uuid.v4()
-    const [_, files] = await form.parseAsync(req) // eslint-disable-line no-unused-vars
+    const [formParams, files] = await form.parseAsync(req)
+    const accessToken = formParams.access_token[0]
+    const user = await utils.findUserByAccessToken(accessToken, res)
     const path = files.file[0].path
     const s3 = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY
+      accessKeyId: user.s3_details.aws_access_key,
+      secretAccessKey: user.s3_details.aws_secret_key
     })
     Promise.promisifyAll(Object.getPrototypeOf(s3))
-    const Bucket = 'Bucketly'
+    const Bucket = user.s3_details.bucket_name
+    const id = uuid.v4()
     const params = { Bucket, Key: id, Body: fs.createReadStream(path) }
 
     await s3.createBucketAsync({ Bucket })
