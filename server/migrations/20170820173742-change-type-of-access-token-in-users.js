@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.changeColumn('Users', 'access_token', {
+    return queryInterface.changeColumn('users', 'access_token', {
       type: Sequelize.TEXT,
       allowNull: false
     })

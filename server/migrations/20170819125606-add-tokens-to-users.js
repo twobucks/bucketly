@@ -2,9 +2,9 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.addColumn('Users', 'access_token', Sequelize.STRING)
-    queryInterface.addColumn('Users', 'twitter_id', Sequelize.INTEGER)
-    queryInterface.addColumn('Users', 'github_id', Sequelize.INTEGER)
+    queryInterface.addColumn('users', 'access_token', Sequelize.STRING)
+    queryInterface.addColumn('users', 'twitter_id', Sequelize.INTEGER)
+    return queryInterface.addColumn('users', 'github_id', Sequelize.INTEGER)
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -15,9 +15,9 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.removeColumn('Users', 'access_token', Sequelize.STRING)
-    queryInterface.removeColumn('Users', 'twitter_id', Sequelize.INTEGER)
-    queryInterface.removeColumn('Users', 'github_id', Sequelize.INTEGER)
+    queryInterface.removeColumn('users', 'access_token', Sequelize.STRING)
+    queryInterface.removeColumn('users', 'twitter_id', Sequelize.INTEGER)
+    return queryInterface.removeColumn('users', 'github_id', Sequelize.INTEGER)
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

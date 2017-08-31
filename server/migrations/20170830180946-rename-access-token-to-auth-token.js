@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.renameColumn('Users', 'access_token', 'auth_token')
+    return queryInterface.renameColumn('users', 'access_token', 'auth_token')
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -13,7 +13,7 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.renameColumn('Users', 'auth_token', 'access_token')
+    return queryInterface.renameColumn('users', 'auth_token', 'access_token')
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

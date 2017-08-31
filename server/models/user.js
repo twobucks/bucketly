@@ -8,11 +8,13 @@ module.exports = function (sequelize, DataTypes) {
     github_id: DataTypes.INTEGER,
     access_token: DataTypes.STRING
   }, {
-    classMethods: {
-      associate: function (models) {
-        User.hasMany(models.Image, { foreign_key: 'user_id' })
-      }
-    }
+    underscored: true,
+    freezeTableName: true,
+    tableName: 'users'
   })
+
+  User.associate = function (models) {
+    User.hasMany(models.Image, { foreignKey: 'user_id' })
+  }
   return User
 }
