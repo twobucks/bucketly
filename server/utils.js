@@ -2,6 +2,19 @@ const models = require('./models')
 const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 
+function getPublicReadPolicy (bucket) {
+  return {
+    "Version": "2008-10-17",
+    "Statement": [{
+      "Sid": "AllowPublicRead",
+      "Effect": "Allow",
+      "Principal": { "AWS": "*" },
+      "Action": ["s3:GetObject"],
+      "Resource": [`arn:aws:s3:::${bucket}/*` ]
+    }]
+  }
+}
+
 function whereQueryFromUserInfo (userinfo) {
   const sub = userinfo.sub
 
@@ -79,5 +92,6 @@ module.exports = {
   findUserByAccessToken,
   whereQueryFromUserInfo,
   getJWTToken,
-  jwtCheck
+  jwtCheck,
+  getPublicReadPolicy
 }

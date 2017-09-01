@@ -12,6 +12,7 @@ const AuthenticationClient = require('auth0').AuthenticationClient
 const Promise = require('bluebird')
 const multiparty = Promise.promisifyAll(require('multiparty'), {multiArgs: true})
 const fs = Promise.promisifyAll(require('fs'))
+const s3publicUrl = Promise.promisifyAll(require('s3-public-url'))
 
 const models = require('./models')
 const utils = require('./utils')
@@ -87,7 +88,7 @@ app.post('/api/test', utils.jwtCheck, utils.findUserByAuthToken, async (req, res
     res.json({ })
   } catch (e) {
     // TODO: better error handling
-    res.status(500).json({
+    res.status(422).json({
       error: e.message
     })
   }
@@ -101,10 +102,12 @@ app.post('/api/images', async (req, res) => {
       res.status(422).json({
         error: "access token is required"
       })
+      return
     }
     const accessToken = formParams.access_token[0]
     const user = await utils.findUserByAccessToken(accessToken, res)
     const path = files.file[0].path
+    // TODO: check if the user has all the S3 details set up
     const s3 = new AWS.S3({
       accessKeyId: user.s3_details.aws_access_key,
       secretAccessKey: user.s3_details.aws_secret_key
@@ -113,19 +116,30 @@ app.post('/api/images', async (req, res) => {
     const Bucket = user.s3_details.bucket_name
     const id = uuid.v4()
     const params = { Bucket, Key: id, Body: fs.createReadStream(path) }
+    const policy = utils.getPublicReadPolicy(Bucket)
 
-    await s3.createBucketAsync({ Bucket })
+    await s3.createBucketAsync({ Bucket, ACL: "public-read" })
+    await s3.putBucketPolicyAsync({ Bucket, Policy: JSON.stringify(policy) })
+
     await s3.putObjectAsync(params)
+    const { locationConstraint } = await s3.getBucketLocationAsync({ Bucket })
+    const url = await s3publicUrl.getHttps(Bucket, id, locationConstraint)
 
     console.log('Successfully uploaded data to ' + Bucket + '/' + id)
+
+    const image = await models.Image.create({
+      url
+    })
+    await user.addImage(image)
 
     await fs.unlinkAsync(path)
 
     res.json({
-      uuid: id
+      url
     })
   } catch (e) {
-    res.status(500).json({
+    console.error(e)
+    res.status(422).json({
       error: e.message
     })
   }
