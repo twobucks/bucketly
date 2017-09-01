@@ -36,54 +36,6 @@ class App extends Component {
 
         </section>
 
-        <section className='pricing'>
-          <div className='pricing-heading'>
-            <h1>Pricing</h1>
-          </div>
-          <div className='pricing-table'>
-            <div className='pricing-plan'>
-              <h2>Free</h2>
-              <ul>
-                <li>
-                  Host your own instance
-                </li>
-                <li>
-                  <b>
-                    $0/mo
-                  </b>
-                </li>
-              </ul>
-              <a href='https://github.com/twobucks/bucketly#readme' className='btn reverse'>
-                Get started
-              </a>
-            </div>
-            <div className='pricing-plan'>
-              <h2>Private</h2>
-              <ul>
-                <li>
-                  Unlimited screenshots
-                </li>
-                <li>
-                  Dedicated support
-                </li>
-                <li>
-                  Free 30 day trial - no credit card required
-                </li>
-                <li>
-                  100% money back guarantee
-                </li>
-                <li>
-                  <b>
-                    $2/mo
-                  </b>
-                </li>
-              </ul>
-
-              <Link to='/login' className='btn reverse'>Get started</Link>
-            </div>
-          </div>
-        </section>
-
         <Footer />
       </div>
     )
