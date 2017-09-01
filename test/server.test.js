@@ -39,7 +39,7 @@ describe('express serving', function () {
     .then(res => expect(res.text).to.contain('<div id="root"></div>'))
   })
 
-  it.only('responds to POST on /api/images', () => {
+  it('responds to POST on /api/images', () => {
     return request(app)
     .post('/api/images')
     .attach('file', 'test/cat.jpg')
