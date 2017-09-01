@@ -97,6 +97,11 @@ app.post('/api/images', async (req, res) => {
   try {
     const form = new multiparty.Form()
     const [formParams, files] = await form.parseAsync(req)
+    if (!formParams.access_token){
+      res.status(422).json({
+        error: "access token is required"
+      })
+    }
     const accessToken = formParams.access_token[0]
     const user = await utils.findUserByAccessToken(accessToken, res)
     const path = files.file[0].path
