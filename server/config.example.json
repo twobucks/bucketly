@@ -7,7 +7,7 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
+    "username": "postgres",
     "password": null,
     "database": "bucketly_test",
     "host": "127.0.0.1",
