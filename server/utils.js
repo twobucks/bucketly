@@ -55,8 +55,8 @@ async function findUserByAuthToken (req, res, next) {
   })
 
   if (!user) {
-    res.status(404).json({
-      error: "user not found"
+    res.status(401).json({
+      error: 'user not found'
     })
     return
   }

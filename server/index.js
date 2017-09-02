@@ -51,8 +51,8 @@ app.post('/api/login', utils.jwtCheck, async (req, res) => {
 
 app.get('/api/tokens', utils.jwtCheck, utils.findUserByAuthToken, async (req, res) => {
   if (!req.user) {
-    res.status(404).json({
-      error: 'User not found'
+    res.status(401).json({
+      error: 'user not found'
     })
     return
   }
@@ -135,8 +135,16 @@ app.post('/api/images', async (req, res) => {
     }
     const accessToken = formParams.access_token[0]
     const user = await utils.findUserByAccessToken(accessToken, res)
+    if (!user) {
+      return
+    }
     const path = files.file[0].path
-    // TODO: check if the user has all the S3 details set up
+    if (_.isEmpty(user.s3_details)) {
+      res.status(422).json({
+        error: 'S3 configuration is not set up yet'
+      })
+      return
+    }
     const s3 = new AWS.S3({
       accessKeyId: user.s3_details.aws_access_key,
       secretAccessKey: user.s3_details.aws_secret_key
