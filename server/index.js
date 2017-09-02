@@ -21,7 +21,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(compression())
 app.use(emojiFavicon('sparkles'))
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'))
+
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'))
+}
 
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
 
