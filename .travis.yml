@@ -5,7 +5,7 @@ install:
   - mv server/config.example.json server/config.json
 before_script:
   - psql -c 'create database bucketly_test;' -U postgres
-  - psql -c 'CREATE EXTENSION IF NOT EXISTS hstore;' -U postgres
+  - psql -d postgres -U postgres -c 'CREATE EXTENSION hstore;'
 notifications:
   email: false
 language: node_js
