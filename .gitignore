@@ -1,3 +1,4 @@
 server/config.json
 .DS_Store
 fun.js
+travis-debug.sh
