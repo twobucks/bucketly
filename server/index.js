@@ -95,23 +95,29 @@ app.post('/api/test', utils.jwtCheck, utils.findUserByAuthToken, async (req, res
 })
 
 app.get('/api/images', utils.jwtCheck, utils.findUserByAuthToken, async (req, res) => {
-  const images = await req.user.getImages()
-  const imagesJson = images.map(function (image) {
-    return {
-      url: image.url
-    }
-  })
+  try {
+    const images = await req.user.getImages()
+    const imagesJson = images.map(function (image) {
+      return {
+        url: image.url
+      }
+    })
 
-  const imageCount = await models.Image.count({
-    where: {
-      'user_id': req.user.id
-    }
-  })
+    const imageCount = await models.Image.count({
+      where: {
+        'user_id': req.user.id
+      }
+    })
 
-  res.json({
-    images: imagesJson,
-    count: imageCount
-  })
+    res.json({
+      images: imagesJson,
+      count: imageCount
+    })
+  } catch (e) {
+    res.status(422).json({
+      error: e.message
+    })
+  }
 })
 
 app.post('/api/images', async (req, res) => {
