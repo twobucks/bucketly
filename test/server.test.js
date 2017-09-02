@@ -3,8 +3,6 @@ const exec = require('mz/child_process').exec
 const request = require('supertest-as-promised')
 const expect = require('chai').expect
 
-const app = require('../server')
-
 describe('builds application', function () {
   it('builds to "build" directory', function () {
     // Disable mocha time-out because this takes a lot of time
@@ -16,6 +14,17 @@ describe('builds application', function () {
 })
 
 describe('express serving', function () {
+  let app = require('../server/app')
+  let server
+
+  beforeEach(function () {
+    server = app.listen(3000)
+  })
+
+  afterEach(function () {
+    server.close()
+  })
+
   it('responds to / with the index.html', function () {
     return request(app)
     .get('/')
@@ -38,21 +47,4 @@ describe('express serving', function () {
     .expect(200)
     .then(res => expect(res.text).to.contain('<div id="root"></div>'))
   })
-
-  it('responds to POST on /api/images', () => {
-    return request(app)
-    .post('/api/images')
-    .attach('file', 'test/cat.jpg')
-    .expect('Content-Type', /application\/json/)
-    .expect(422)
-    .then(res => expect(JSON.parse(res.text).error).to.contain('access token is required'))
-  }).timeout(0)
-
-  it('responds to POST on /api/test', () => {
-    return request(app)
-    .post('/api/test')
-    .expect('Content-Type', /application\/json/)
-    .expect(401)
-    .then(res => expect(JSON.parse(res.text).error).to.contain('invalid token'))
-  }).timeout(0)
 })

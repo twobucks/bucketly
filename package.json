@@ -7,7 +7,9 @@
   "standard": {
     "globals": [
       "it",
-      "describe"
+      "describe",
+      "beforeEach",
+      "afterEach"
     ],
     "ignore": [
       "client/build",
@@ -70,6 +72,8 @@
     "mocha": "^3.5.0",
     "mz": "^2.6.0",
     "nodemon": "^1.11.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^3.2.1",
     "stylus": "^0.54.5",
     "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.2",
