@@ -26,10 +26,10 @@ class Images extends Component {
     })
   }
 
-  renderImages(){
+  renderImages () {
     const images = this.state.images.map((image, index) => {
       return <li key={index}>
-        <img src={image.url}/>
+        <img src={image.url} />
       </li>
     })
 
@@ -45,13 +45,13 @@ class Images extends Component {
       return null
     }
 
-    const imageLabel = this.state.count === 1 ? "image" :
-      "images"
-    const content = this.state.count === 0 ?
-      <p>
+    const imageLabel = this.state.count === 1 ? 'image'
+      : 'images'
+    const content = this.state.count === 0
+      ? <p>
         <Link to='/setup' className='btn reverse'>Set up your account with S3</Link>
-      </p> :
-      this.renderImages()
+      </p>
+      : this.renderImages()
 
     return (
       <div>
