@@ -4,8 +4,8 @@ install:
   - npm install -g create-react-app react-scripts
   - mv server/config.example.json server/config.json
 before_script:
-  - psql -c 'create database bucketly_test;' -U postgres
   - psql -d postgres -U postgres -c 'CREATE EXTENSION hstore;'
+  - psql -c 'create database bucketly_test;' -U postgres
 notifications:
   email: false
 language: node_js
