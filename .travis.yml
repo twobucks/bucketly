@@ -10,3 +10,7 @@ notifications:
 language: node_js
 node_js:
   - "8"
+cache:
+  directories:
+    - node_modules
+    - client/node_modules
