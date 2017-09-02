@@ -19,11 +19,11 @@ export default class Auth {
     })
   }
 
-  handleAuthentication (hash) {
+  handleAuthentication (hash, next) {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken) {
         this.setSession(authResult)
-        this.login(authResult.accessToken)
+        this.login(authResult.accessToken, next)
       } else if (err) {
         console.log(err)
       }
@@ -37,13 +37,13 @@ export default class Auth {
     localStorage.setItem('expires_at', expiresAt)
   }
 
-  login (token) {
+  login (token, next) {
     const instance = axios.create({
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    instance.post('/api/login')
+    instance.post('/api/login').then(next)
   }
 
   logout () {
