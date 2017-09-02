@@ -179,6 +179,17 @@ app.use(function (err, req, res, next) {
   }
 })
 
+app.use(function(req, res, next){
+  res.status(404);
+
+  if (req.accepts('json')) {
+    res.send({ error: 'not found' });
+    return;
+  }
+
+  res.type('txt').send('not found');
+})
+
 const server = app.listen(9000, function () {
   const port = server.address().port
 
