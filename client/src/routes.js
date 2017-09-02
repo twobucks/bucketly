@@ -20,10 +20,10 @@ const auth = new Auth()
 const handleAuthentication = (nextState, replace) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication(nextState.location.hash, () => {
+      // we're using window.location here on purpose,
+      // otherwise the token will not be set for the first request
       window.location = '/images'
     })
-    // we're using window.location here on purpose,
-    // otherwise the token will not be set for the first request
   }
 }
 
