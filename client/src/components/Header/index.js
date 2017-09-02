@@ -23,6 +23,9 @@ class Header extends Component {
 
         <ul>
           <li>
+            <a href='/setup'>Setup</a>
+          </li>
+          <li>
             <a href='/logout' onClick={this.logout}>Log out</a>
           </li>
         </ul>
