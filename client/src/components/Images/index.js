@@ -29,7 +29,7 @@ class Images extends Component {
   renderImages () {
     const images = this.state.images.map((image, index) => {
       return <li key={index}>
-        <img src={image.url} />
+        <img src={image.url} alt={index} />
       </li>
     })
 
