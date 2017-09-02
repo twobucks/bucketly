@@ -15,13 +15,18 @@
     ]
   },
   "scripts": {
-    "test": "standard --fix && mocha test && cd client && npm test",
-    "start": "nodemon server & cd client && npm start",
+    "lint": "standard --fix",
+    "test:setup": "NODE_ENV=test sequelize db:migrate",
+    "test:server": "NODE_ENV=test mocha test",
+    "test:client": "NODE_ENV=test cd client && npm test",
+    "test": "run-s lint test:setup test:server test:client",
     "start:server": "node server",
-    "watch": "npm run watch-js & DEBUG=instant* nodemon server",
-    "build-js": "cd client && npm run build",
-    "watch-js": "cd client/ && npm start",
-    "build": "npm run build-js"
+    "start:client": "cd client && npm start",
+    "start": "run-p start:server start:client",
+    "watch:client": "cd client/ && npm start",
+    "watch:server": "DEBUG=instant* nodemon server",
+    "watch": "run-p watch:client watch:server",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
