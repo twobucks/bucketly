@@ -98,9 +98,9 @@ app.post('/api/images', async (req, res) => {
   try {
     const form = new multiparty.Form()
     const [formParams, files] = await form.parseAsync(req)
-    if (!formParams.access_token){
+    if (!formParams.access_token) {
       res.status(422).json({
-        error: "access token is required"
+        error: 'access token is required'
       })
       return
     }
@@ -118,7 +118,7 @@ app.post('/api/images', async (req, res) => {
     const params = { Bucket, Key: id, Body: fs.createReadStream(path) }
     const policy = utils.getPublicReadPolicy(Bucket)
 
-    await s3.createBucketAsync({ Bucket, ACL: "public-read" })
+    await s3.createBucketAsync({ Bucket, ACL: 'public-read' })
     await s3.putBucketPolicyAsync({ Bucket, Policy: JSON.stringify(policy) })
 
     await s3.putObjectAsync(params)

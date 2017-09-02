@@ -4,13 +4,13 @@ const jwks = require('jwks-rsa')
 
 function getPublicReadPolicy (bucket) {
   return {
-    "Version": "2008-10-17",
-    "Statement": [{
-      "Sid": "AllowPublicRead",
-      "Effect": "Allow",
-      "Principal": { "AWS": "*" },
-      "Action": ["s3:GetObject"],
-      "Resource": [`arn:aws:s3:::${bucket}/*` ]
+    'Version': '2008-10-17',
+    'Statement': [{
+      'Sid': 'AllowPublicRead',
+      'Effect': 'Allow',
+      'Principal': { 'AWS': '*' },
+      'Action': ['s3:GetObject'],
+      'Resource': [`arn:aws:s3:::${bucket}/*`]
     }]
   }
 }
