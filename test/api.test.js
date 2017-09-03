@@ -83,15 +83,103 @@ describe('API', function () {
              .expect('Content-Type', /application\/json/)
              .expect(200)
              .then(res => expect(JSON.parse(res.text).url).to.contain(url))
+             .then(() => {
+               uploadMock.verify()
+             })
              .then(app.close)
     }).timeout(0)
   })
 
-  it('responds to POST on /api/test', () => {
-    return request(app)
-      .post('/api/test')
-      .expect('Content-Type', /application\/json/)
-      .expect(401)
-      .then(res => expect(JSON.parse(res.text).error).to.contain('invalid token'))
-  }).timeout(0)
+  describe('POST /api/test', () => {
+    it('responds with 401 when no token is sent', () => {
+      return request(app)
+        .post('/api/test')
+        .expect('Content-Type', /application\/json/)
+        .expect(401)
+        .then(res => expect(JSON.parse(res.text).error).to.contain('invalid token'))
+    }).timeout(0)
+
+    it('responds with 401 for invalid token', () => {
+      const utilsMock = {
+        jwtCheck: function(req, res, next) {
+          next()
+        }
+      }
+      const app = proxyquire('../server/app', {
+        './utils': utilsMock
+      })
+
+      return request(app)
+        .post('/api/test')
+        .set('Authorization', 'Bearer 123')
+        .expect('Content-Type', /application\/json/)
+        .expect(401)
+        .then(res => expect(JSON.parse(res.text).error).to.contain('user not found'))
+    }).timeout(0)
+
+    it('responds with 422 when S3 details are missing', async () => {
+      await models.User.create({
+        auth_token: '123'
+      })
+
+      const utilsMock = {
+        jwtCheck: function(req, res, next) {
+          next()
+        }
+      }
+      const app = proxyquire('../server/app', {
+        './utils': utilsMock
+      })
+
+      return request(app)
+        .post('/api/test')
+        .set('Authorization', 'Bearer 123')
+        .expect('Content-Type', /application\/json/)
+        .expect(422)
+        .then(res => expect(JSON.parse(res.text).error).to.contain('accessKey is missing from arguments'))
+    }).timeout(0)
+
+    it('responds with 200 when S3 details are present', async () => {
+      await models.User.create({
+        auth_token: '123',
+        s3_details: {
+          bucket_name: 'bucket',
+          aws_access_key: 'access',
+          aws_secret_key: 'secret'
+        }
+      })
+
+
+      class UploaderMock {
+        upload () {
+        }
+        delete () {
+        }
+      }
+      const uploadMock = sinon.mock(UploaderMock.prototype)
+      uploadMock.expects('upload').once()
+      uploadMock.expects('delete').once()
+
+      const utilsMock = {
+        jwtCheck: function(req, res, next) {
+          next()
+        }
+      }
+      const app = proxyquire('../server/app', {
+        './utils': utilsMock,
+        './uploader': UploaderMock
+      })
+
+      return request(app)
+        .post('/api/test')
+        .set('Authorization', 'Bearer 123')
+        .expect('Content-Type', /application\/json/)
+        .expect(200)
+        .then(() => {
+          uploadMock.verify()
+        })
+
+    }).timeout(0)
+  })
+
 })
