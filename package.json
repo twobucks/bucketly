@@ -2,7 +2,7 @@
   "name": "Bucketly",
   "version": "0.0.1",
   "private": true,
-  "description": "Affordable screenshot sharing, using your own S3. Free when self-hosted and $2/mo for a private plan.",
+  "description": "Free screenshot sharing, using your own S3.",
   "main": "index.js",
   "standard": {
     "globals": [
